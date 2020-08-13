@@ -1,19 +1,25 @@
 #include <Arduino.h>
-#define onboard 13
+#include <Servo.h>
+
+// Defines Trig and Echo pins for the Ultrasonic Sensor
+const int trigPin = 10;
+const int echoPin = 11;
+
+Servo myServo; // Creates a servo object for controlling the servo motor
+
 
 void setup() {
-  
-  // put your setup code here, to run once:
-  pinMode(onboard, OUTPUT);
-  Serial.begin(9600);
 
+  Serial.begin(9600);
+  myServo.attach(12); // Defines on which pin the servo motor is attached
+  
 }
 
 void loop() {
-  digitalWrite(onboard, LOW);
-  delay(1000);
-  digitalWrite(onboard, HIGH);
-  delay(1000);
-  Serial.println("loop completed");
-  // put your main code here, to run repeatedly:
+  // Rotates the servo motor from 15 to 165 degrees
+  // for(int i=15; i<=165;i++){
+  //   myServo.write(i);
+  //   delay(30);
+  // }
+ 
 }
