@@ -23,16 +23,28 @@ void setup() {
 
 void loop() {
   // Rotates the servo motor from 15 to 165 degrees
-  for(int i=15; i<=165;i++){
+  for(int i=15; i<=165; i++){
     myServo.write(i);
     delay(30);
 
     distance = calculateDistance(); // Calls a function for calculating the distance measured by the Ultrasonic sensor for each degree
 
-
-    Serial.print("Distance: ");
+    Serial.print(i);
+    Serial.print(",");
     Serial.print(distance);
-    Serial.print(" cm");
+    Serial.print(".");
+
+  }
+
+  for(int i=165; i>15; i--){
+    myServo.write(i);
+    delay(30);
+    distance = calculateDistance();
+
+    Serial.print(i);
+    Serial.print(",");
+    Serial.print(distance);
+    Serial.print(".");
   }
 
  
@@ -46,7 +58,9 @@ int calculateDistance() {
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH); // Reads the echopin, return the sound wave travel time
   // Reads the echoPin, returns the sound wave traveltime in ms
   distance = duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  return distance;
   
 }
